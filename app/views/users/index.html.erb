@@ -1,0 +1,60 @@
+  <%= stylesheet_link_tag    "style", :media => "all" %>
+  <div class="nav">
+        <ul>
+
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Location</a></li>
+            <li><a href="#">Contact</a></li>
+            <%if signed_in?%>
+            <div class="floatright">
+                <li><a href=" /users/sign_up">Sign Up</a></li>
+                <li><%=link_to "logout", destroy_user_session_path, method: :delete%></li>
+                
+            </div>
+        <%end%>     
+        </ul>   
+
+</div>
+<br/><br/><br/><br/>
+
+<div class="font">
+<h1>My CV</h1>
+</div>
+
+<br/><br/>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;Age</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;Sex</th>
+    <th>Dob</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workexpereance</th>
+    <th>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phonenumber
+    </th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+
+  <tr>
+    <td><%= user.name %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= user.age %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= user.sex %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.dob %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.workexpereance %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.email %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.number %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'View', user %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_user_path(user), data: { confirm: 'Do you want to edit?' } %></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', user, method: :delete, data: { confirm: 'Do you want to delete?' } %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New User', new_user_path %>
